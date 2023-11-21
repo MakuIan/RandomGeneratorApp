@@ -1,17 +1,26 @@
-import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Index = () => {
-  const [page, setPage] = React.useState("index");
+  const navigation = useNavigation();
+  const goToRoute = (routeName: string) => {
+    navigation.navigate(routeName);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.section}>
-        <TouchableOpacity style={styles.sectionButton}>
+        <TouchableOpacity
+          style={styles.sectionButton}
+          onPress={() => goToRoute("RandomGenerator")}
+        >
           <Text style={styles.buttonText}>Random Generator</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.section}>
-        <TouchableOpacity style={styles.sectionButton}>
+        <TouchableOpacity
+          style={styles.sectionButton}
+          onPress={() => goToRoute("Wheel")}
+        >
           <Text style={styles.buttonText}>Wheel</Text>
         </TouchableOpacity>
       </View>
@@ -27,6 +36,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 50,
     paddingHorizontal: 20,
+    backgroundColor: "#d5799c",
   },
   section: {
     marginBottom: 20,
