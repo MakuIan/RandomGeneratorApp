@@ -1,9 +1,9 @@
 import { Alert } from "react-native";
 
 class InputError extends Error {
-  constructor(message: string) {
+  constructor(message: string,name: string) {
     super(message);
-    this.name = "InputError";
+    this.name = name;
   }
 
   public showAlert(msg: string): void {
