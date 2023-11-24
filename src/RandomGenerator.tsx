@@ -8,10 +8,12 @@ import {
 } from "react-native";
 import { useState } from "react";
 import InputError from "./InputError";
+import generateRandomNumber from "./randomNumber";
 
 const RandomGenerator = () => {
   const [startingValue, setStartingValue] = useState("");
   const [endValue, setEndValue] = useState("");
+  const [randomNumber, setRandomNumber] = useState(0);
   const handleInputChange = () => {
     if (!startingValue.trim() || !endValue.trim()) {
       Alert.alert("Please enter a value");
@@ -22,7 +24,16 @@ const RandomGenerator = () => {
         if (isNaN(startingValueNumber) || isNaN(endValueNumber)) {
           throw new InputError("Please enter a number", "InputError");
         } else {
-          Alert.alert("good");
+          //Genrate random number
+          try {
+            const randomNumber = generateRandomNumber(
+              startingValueNumber,
+              endValueNumber,
+            );
+            setRandomNumber(randomNumber);
+          } catch {
+            Alert.alert("Please enter a valid range");
+          }
         }
       } catch (err) {
         if (err instanceof InputError) {
@@ -37,19 +48,35 @@ const RandomGenerator = () => {
     <View style={styles.containerStyle}>
       <View style={styles.field}>
         <View style={styles.inputStyle}>
-          <TextInput
-            placeholder="Starting value"
-            style={styles.startingValueStyle}
-            value={startingValue}
-            onChangeText={(text) => setStartingValue(text)}
-          ></TextInput>
-          <TextInput
-            placeholder="End value"
-            value={endValue}
-            style={styles.endValueStyle}
-            onChangeText={(text) => setEndValue(text)}
-          ></TextInput>
+          <View style={styles.inputField}>
+            <Text style={styles.labelStyle}> Starting Value</Text>
+            <TextInput
+              placeholder="Starting value"
+              style={styles.startingValueStyle}
+              value={startingValue}
+              onChangeText={(text) => setStartingValue(text)}
+            ></TextInput>
+          </View>
+          <View style={styles.inputField}>
+            <Text style={styles.labelStyle}> End Value</Text>
+            <TextInput
+              placeholder="End value"
+              value={endValue}
+              style={styles.endValueStyle}
+              onChangeText={(text) => setEndValue(text)}
+            ></TextInput>
+          </View>
+          <View style={styles.inputField}>
+            <Text style={randomNumber ? styles.labelStyle : styles.resultHide}>
+              {" "}
+              Result
+            </Text>
+            {randomNumber ? (
+              <Text style={styles.resultShow}>{randomNumber}</Text>
+            ) : null}
+          </View>
         </View>
+
         <TouchableOpacity
           style={styles.generateButton}
           onPress={handleInputChange}
@@ -62,6 +89,9 @@ const RandomGenerator = () => {
 };
 
 const styles = StyleSheet.create({
+  inputField: {
+    marginBottom: 20,
+  },
   containerStyle: {
     flex: 1,
     display: "flex",
@@ -107,6 +137,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#69f8f1",
     padding: 15,
     borderRadius: 10,
+  },
+  resultShow: {
+    backgroundColor: "#047076",
+    padding: 15,
+    borderRadius: 10,
+  },
+  resultHide: {
+    display: "none",
+  },
+  labelStyle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
   },
 });
 
