@@ -11,8 +11,8 @@ import InputError from "./InputError";
 import generateRandomNumber from "./randomNumber";
 
 const RandomGenerator = () => {
-  const [startingValue, setStartingValue] = useState("");
-  const [endValue, setEndValue] = useState("");
+  const [startingValue, setStartingValue] = useState("1");
+  const [endValue, setEndValue] = useState("30");
   const [randomNumber, setRandomNumber] = useState(0);
   const handleInputChange = () => {
     if (!startingValue.trim() || !endValue.trim()) {
@@ -81,7 +81,7 @@ const RandomGenerator = () => {
           style={styles.generateButton}
           onPress={handleInputChange}
         >
-          <Text>Generate</Text>
+          <Text style={styles.generateButtonText}>Generate</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -98,14 +98,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
-    backgroundColor: "#d5799c",
+    backgroundColor: "#5d2735",
   },
   field: {
     width: "100%",
     display: "flex",
     flexDirection: "column",
     gap: 30,
-    backgroundColor: "#fff",
+    backgroundColor: "#bfc12f",
     color: "#6351c1",
     marginBottom: 20,
     padding: 15,
@@ -124,23 +124,30 @@ const styles = StyleSheet.create({
   startingValueStyle: {
     marginBottom: 20,
     padding: 15,
-    backgroundColor: "#69f8f1",
+    backgroundColor: "#ca0b74",
+    color: "white",
     borderRadius: 10,
   },
   endValueStyle: {
     marginBottom: 20,
     padding: 15,
-    backgroundColor: "#69f8f1",
+    backgroundColor: "#ca0b74",
+    color: "white",
     borderRadius: 10,
   },
   generateButton: {
-    backgroundColor: "#69f8f1",
+    backgroundColor: "#35ecfb",
     padding: 15,
     borderRadius: 10,
   },
+  generateButtonText: {
+    color: "white",
+    fontSize: 16,
+  },
   resultShow: {
-    backgroundColor: "#047076",
+    backgroundColor: "#5c7440",
     padding: 15,
+    color: "white",
     borderRadius: 10,
   },
   resultHide: {

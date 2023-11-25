@@ -4,6 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 const Index = () => {
   const navigation = useNavigation();
   const goToRoute = (routeName: string) => {
+    // @ts-expect-error The navigation.navigate method is not recognized by TypeScript.
+    // It is a valid method provided by the navigation library.
+    // Expecting an error on the following line.
     navigation.navigate(routeName);
   };
   return (
@@ -19,9 +22,9 @@ const Index = () => {
       <View style={styles.section}>
         <TouchableOpacity
           style={styles.sectionButton}
-          onPress={() => goToRoute("Wheel")}
+          onPress={() => goToRoute("RandomCivMap")}
         >
-          <Text style={styles.buttonText}>Wheel</Text>
+          <Text style={styles.buttonText}>Random Civ Map</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 50,
     paddingHorizontal: 20,
-    backgroundColor: "#d5799c",
+    backgroundColor: "#5d2735",
   },
   section: {
     marginBottom: 20,
